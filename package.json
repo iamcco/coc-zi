@@ -1,0 +1,53 @@
+{
+  "name": "coc-word-plus",
+  "version": "1.0.0",
+  "description": "easy write words for coc.nvim",
+  "keywords": [
+    "coc.nvim",
+    "words",
+    "english"
+  ],
+  "main": "./out/index.js",
+  "repository": "https://github.com/iamcco/coc-word-plus",
+  "author": "iamcco <ooiss@qq.com>",
+  "license": "MIT",
+  "engines": {
+    "coc": "^0.0.74"
+  },
+  "activationEvents": [
+    "*"
+  ],
+  "contributes": {
+    "configuration": {
+      "title": "vim language server configuration",
+      "properties": {
+        "word-plus.enable": {
+          "type": "boolean",
+          "default": true,
+          "description": "enable coc-word-plus"
+        },
+        "word-plus.trace.server": {
+          "type": "string",
+          "default": "off",
+          "enum": [
+            "off",
+            "messages",
+            "verbose"
+          ],
+          "description": "Trace level of log"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "build": "rm -rf ./out && webpack",
+    "watch": "webpack -w"
+  },
+  "devDependencies": {
+    "coc.nvim": "^0.0.74",
+    "ts-loader": "^6.2.1",
+    "typescript": "^3.6.4",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.9"
+  }
+}
