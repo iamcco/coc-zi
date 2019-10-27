@@ -5,8 +5,8 @@ import { CompletionItem, TextDocument, Position, Range } from 'vscode-languagese
 import { Dispose } from '../common/dispose';
 import { findNode } from '../common/util';
 import { Edict } from './edict';
-import words from './10k.json';
 import { logger } from '../common/logger';
+import { Words } from './words';
 
 const log = logger.getLog('complete-provider');
 
@@ -19,19 +19,14 @@ const syntaxKindsValues: Record<string, number> = {
 };
 
 export class WordCompleteProvider extends Dispose {
-  private words: CompletionItem[];
   private patterns: Record<string, string[]>;
   private syntaxKinds: Record<string, string[]>;
 
-  constructor(private edict: Edict) {
+  constructor(private edict: Edict, private words: Words) {
     super();
     const config = workspace.getConfiguration('zi');
     this.patterns = config.get('patterns', {});
     this.syntaxKinds = config.get('syntaxKinds', {});
-    this.words = (words as string[]).map(word => ({
-      label: word,
-      insertText: word,
-    }));
     this.registerCompletionItemProvider();
     log('init');
   }
@@ -101,14 +96,17 @@ export class WordCompleteProvider extends Dispose {
 
   getWords(word: string) {
     if (/^[A-Z]/.test(word)) {
-      return this.words.map(w => {
-        const label = `${w.label[0].toUpperCase()}${w.label.slice(1)}`;
+      return this.words.words.map(w => {
+        const label = `${w.toUpperCase()}${w.slice(1)}`;
         return {
           label,
           insertText: label,
         };
       });
     }
-    return this.words;
+    return this.words.words.map(w => ({
+      label: w,
+      insertText: w,
+    }));
   }
 }

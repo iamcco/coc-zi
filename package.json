@@ -1,6 +1,6 @@
 {
   "name": "coc-zi",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "words for coc.nvim",
   "keywords": [
     "coc.nvim",
@@ -40,6 +40,7 @@
         "zi.patterns": {
           "type": "object",
           "default": {
+            "": [],
             "javascript": [
               "^\\s*\\/\\/",
               "^\\s*\\/\\*",
@@ -116,11 +117,13 @@
     "@typescript-eslint/eslint-plugin": "^2.5.0",
     "@typescript-eslint/parser": "^2.5.0",
     "coc.nvim": "^0.0.74",
+    "colors": "^1.4.0",
     "eslint": "^6.6.0",
     "eslint-config-prettier": "^6.5.0",
     "eslint-plugin-prettier": "^3.1.1",
     "got": "^9.6.0",
     "prettier": "^1.18.2",
+    "request-light": "^0.2.4",
     "ts-loader": "^6.2.1",
     "tunnel": "^0.0.6",
     "typescript": "^3.6.4",
