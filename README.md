@@ -1,15 +1,22 @@
-# (neo)vim dictionary of [google 10000 english](https://github.com/first20hours/google-10000-english)
+# coc-zi
 
-set &dictionary for (neo)vim
+Auto suggest 10k english words when you type.
+
+- auto suggest
+- hover document
 
 ## Install
 
-vim-plug:
+`:CocInstall coc-zi`
 
-```viml
-Plug 'iamcco/words.vim'
-```
+## Translators
 
-## usage
+`:CocList translators`
 
-type `<c-x><c-k>` in (neo)vim
+## Settings
+
+- `zi.enable`: enable coc-zi
+- `zi.trace.server`: Trace level of log
+- `zi.patterns`: javascript regex patterns to enable autocomplete, empty array `[]` means enable for whole buffer
+- `zi.syntaxKinds.javascript`: syntax kind to enable autocomplete
+- `zi.syntaxKinds.typescript`: syntax kind to enable autocomplete
