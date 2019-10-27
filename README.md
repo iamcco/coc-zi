@@ -1,15 +1,15 @@
-# (neo)vim dictionary of [google 10000 english](https://github.com/first20hours/google-10000-english)
-
-set &dictionary for (neo)vim
+# coc-zi
 
 ## Install
 
-vim-plug:
+`:CocInstall coc-zi`
 
-```viml
-Plug 'iamcco/words.vim'
-```
+## TODO
 
-## usage
-
-type `<c-x><c-k>` in (neo)vim
+- [ ] completion english words for comment or string
+  - [x] javascript
+  - [x] typescript
+- [x] using edict for completion items's document
+- [x] hover document
+- [ ] add translate coc-list use sources
+- [ ] pinyin input method
