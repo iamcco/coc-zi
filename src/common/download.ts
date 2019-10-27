@@ -1,7 +1,6 @@
 import fs from 'fs';
 import tunnel from 'tunnel';
 import got from 'got';
-
 import { workspace } from 'coc.nvim';
 import { Agent } from 'http';
 

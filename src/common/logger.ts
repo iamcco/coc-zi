@@ -1,5 +1,6 @@
-import { Dispose } from './dispose';
 import { OutputChannel, workspace } from 'coc.nvim';
+
+import { Dispose } from './dispose';
 
 class Logger extends Dispose {
   private outputChannel: OutputChannel | undefined;

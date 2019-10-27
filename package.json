@@ -1,6 +1,6 @@
 {
   "name": "coc-zi",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "words for coc.nvim",
   "keywords": [
     "coc.nvim",
@@ -36,6 +36,69 @@
             "verbose"
           ],
           "description": "Trace level of log"
+        },
+        "zi.patterns": {
+          "type": "object",
+          "default": {
+            "javascript": [
+              "^\\s*\\/\\/",
+              "^\\s*\\/\\*",
+              "^\\s*\\*"
+            ],
+            "typescript": [
+              "^\\s*\\/\\/",
+              "^\\s*\\/\\*",
+              "^\\s*\\*"
+            ],
+            "markdown": [],
+            "vim": [
+              "^\\s*\\\""
+            ],
+            "gitcommit": []
+          },
+          "description": "javascript regex patterns to enable autocomplete, empty array `[]` means enable for whole buffer"
+        },
+        "zi.syntaxKinds.javascript": {
+          "type": "array",
+          "default": [
+            "StringLiteral",
+            "NoSubstitutionTemplateLiteral",
+            "TemplateHead",
+            "TemplateTail",
+            "TemplateMiddle"
+          ],
+          "items": {
+            "type": "string",
+            "enum": [
+              "StringLiteral",
+              "NoSubstitutionTemplateLiteral",
+              "TemplateHead",
+              "TemplateTail",
+              "TemplateMiddle"
+            ]
+          },
+          "description": "syntax kind to enable autocomplete"
+        },
+        "zi.syntaxKinds.typescript": {
+          "type": "array",
+          "default": [
+            "StringLiteral",
+            "NoSubstitutionTemplateLiteral",
+            "TemplateHead",
+            "TemplateTail",
+            "TemplateMiddle"
+          ],
+          "items": {
+            "type": "string",
+            "enum": [
+              "StringLiteral",
+              "NoSubstitutionTemplateLiteral",
+              "TemplateHead",
+              "TemplateTail",
+              "TemplateMiddle"
+            ]
+          },
+          "description": "syntax kind to enable autocomplete"
         }
       }
     }
@@ -48,6 +111,7 @@
   },
   "devDependencies": {
     "@types/got": "^9.6.7",
+    "@types/node": "^12.11.7",
     "@types/tunnel": "^0.0.1",
     "@typescript-eslint/eslint-plugin": "^2.5.0",
     "@typescript-eslint/parser": "^2.5.0",
@@ -60,9 +124,8 @@
     "ts-loader": "^6.2.1",
     "tunnel": "^0.0.6",
     "typescript": "^3.6.4",
+    "vscode-languageserver-protocol": "^3.14.1",
     "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.9",
-    "@types/node": "^12.11.7",
-    "vscode-languageserver-protocol": "^3.14.1"
+    "webpack-cli": "^3.3.9"
   }
 }

@@ -1,5 +1,5 @@
 import { Node, SourceFile, forEachChild } from 'typescript';
-import { MarkupContent, MarkupKind } from 'vscode-languageserver-types';
+import { MarkupContent, MarkupKind } from 'vscode-languageserver-protocol';
 
 export function findNode(sourceFile: SourceFile, offset: number): Node | undefined {
   function find(node: Node): Node | undefined {

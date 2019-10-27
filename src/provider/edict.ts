@@ -1,5 +1,5 @@
 import { ExtensionContext } from 'coc.nvim';
-import { MarkupKind, MarkupContent } from 'vscode-languageserver-types';
+import { MarkupKind, MarkupContent } from 'vscode-languageserver-protocol';
 import { join } from 'path';
 import { existsSync, mkdirSync, createReadStream } from 'fs';
 import readline from 'readline';
