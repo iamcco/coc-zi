@@ -1,4 +1,9 @@
-# coc-zi
+<h1 align="center">
+  coc-zi
+  <div>
+    <img align="center" width="100px;" src="https://user-images.githubusercontent.com/5492542/67637192-dfbddb80-f912-11e9-9fdf-2985eb015602.gif" />
+  </div>
+</h1>
 
 Auto suggest 10k english words when you type for the right place
 
