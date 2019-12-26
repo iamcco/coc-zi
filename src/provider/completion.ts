@@ -97,7 +97,7 @@ export class WordCompleteProvider extends Dispose {
   getWords(word: string) {
     if (/^[A-Z]/.test(word)) {
       return this.words.words.map(w => {
-        const label = `${w.toUpperCase()}${w.slice(1)}`;
+        const label = `${w[0].toUpperCase()}${w.slice(1)}`;
         return {
           label,
           insertText: label,
