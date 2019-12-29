@@ -1,7 +1,7 @@
 <h1 align="center">
   coc-zi
   <div>
-    <img align="center" width="100px;" src="https://user-images.githubusercontent.com/5492542/67637192-dfbddb80-f912-11e9-9fdf-2985eb015602.gif" />
+    <img align="center" width="100px;" src="https://user-images.githubusercontent.com/20282795/71557618-7594f480-2a83-11ea-8858-6e5f79500de1.gif" />
   </div>
 </h1>
 
