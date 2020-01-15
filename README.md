@@ -47,7 +47,7 @@ Auto suggest 10k english words when you type for the right place
     "gitcommit": []
   }
   ```
-- `zi.syntaxKinds.javascript`: syntax kind to enable autocomplete. defalut:
+- `zi.syntaxKinds.javascript`: syntax kind to enable autocomplete. default:
   ``` jsonc
   "zi.syntaxKinds.javascript": [
     "StringLiteral",
