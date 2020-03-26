@@ -1,6 +1,6 @@
 {
   "name": "coc-zi",
-  "version": "1.0.7",
+  "version": "1.1.0",
   "description": "words for coc.nvim",
   "keywords": [
     "coc.nvim",
@@ -129,6 +129,7 @@
     "typescript": "^3.6.4",
     "vscode-languageserver-protocol": "^3.14.1",
     "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.9"
+    "webpack-cli": "^3.3.9",
+    "which": "^2.0.2"
   }
 }

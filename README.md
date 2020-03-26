@@ -5,7 +5,9 @@
   </div>
 </h1>
 
-Auto suggest 10k english words when you type for the right place
+Auto suggest english words when you type for the right place
+
+> If `look` command does not exists it will use 10k words.
 
 - auto suggest
 - hover document using [ECDICT](https://github.com/skywind3000/ECDICT)

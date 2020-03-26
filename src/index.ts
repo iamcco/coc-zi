@@ -21,6 +21,7 @@ export async function activate(context: ExtensionContext) {
   const edict = new Edict(context);
   const words = new Words(context);
   context.subscriptions.push(edict);
+  await words.init();
 
   // register completion provider
   context.subscriptions.push(new WordCompleteProvider(edict, words));

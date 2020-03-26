@@ -35,7 +35,7 @@ export class WordCompleteProvider extends Dispose {
     this.push(
       languages.registerCompletionItemProvider(
         'coc-zi',
-        '10k',
+        this.words.isUseLook ? 'look' : '10k',
         null,
         {
           provideCompletionItems: async (document: TextDocument, position: Position): Promise<CompletionItem[]> => {
@@ -94,9 +94,10 @@ export class WordCompleteProvider extends Dispose {
     );
   }
 
-  getWords(word: string) {
+  async getWords(word: string) {
+    const words = await this.words.getWords(word)
     if (/^[A-Z]/.test(word)) {
-      return this.words.words.map(w => {
+      return words.map(w => {
         const label = `${w[0].toUpperCase()}${w.slice(1)}`;
         return {
           label,
@@ -104,7 +105,7 @@ export class WordCompleteProvider extends Dispose {
         };
       });
     }
-    return this.words.words.map(w => ({
+    return words.map(w => ({
       label: w,
       insertText: w,
     }));

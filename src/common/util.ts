@@ -1,3 +1,4 @@
+import { ExecOptions, exec } from 'child_process';
 import crypto from 'crypto';
 import { Node, SourceFile, forEachChild } from 'typescript';
 import { MarkupContent, MarkupKind } from 'vscode-languageserver-protocol';
@@ -117,3 +118,32 @@ export function md5(str: string): string {
     .update(str)
     .digest('hex');
 }
+
+export const execCommand = (
+  command: string,
+  options: ExecOptions = {},
+): Promise<{
+  code: number;
+  err: Error | null;
+  stdout: string;
+  stderr: string;
+}> => {
+  return new Promise(resolve => {
+    let code = 0;
+    exec(
+      command,
+      {
+        encoding: 'utf-8',
+        ...options,
+      },
+      (err: Error | null, stdout = '', stderr = '') => {
+        resolve({
+          code,
+          err,
+          stdout,
+          stderr,
+        });
+      },
+    ).on('exit', (co: number) => co && (code = co));
+  });
+};

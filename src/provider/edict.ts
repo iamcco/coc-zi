@@ -75,14 +75,14 @@ export class Edict extends Dispose {
   }
 
   formatDoc(word: string, words: Record<string, string>) {
-    let values = [`**${word}**`];
+    let values = [`*${word}*`];
     if (words.phonetic) {
-      values = values.concat(['', `**音标：**${words.phonetic}`]);
+      values = values.concat(['', `*[${words.phonetic}]*`]);
     }
     if (words.definition) {
       values = values.concat([
         '',
-        '**英文解释：**',
+        '*English*',
         '',
         ...words.definition.split('\\n').map((line: string) => line.replace(/^"/, '')),
       ]);
@@ -90,13 +90,13 @@ export class Edict extends Dispose {
     if (words.translation) {
       values = values.concat([
         '',
-        '**中文解释：**',
+        '*中文*',
         '',
         ...words.translation.split('\\n').map((line: string) => line.replace(/^"/, '')),
       ]);
     }
     if (words.pos) {
-      values = values.concat(['', `**词语位置：**${words.pos.replace(/\n/, ' ')}`]);
+      values = values.concat(['', `*词语位置* ${words.pos.replace(/\n/, ' ')}`]);
     }
     return values;
   }
