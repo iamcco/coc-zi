@@ -27,6 +27,11 @@
           "default": true,
           "description": "enable coc-zi"
         },
+        "zi.hover": {
+          "type": "boolean",
+          "default": true,
+          "description": "enable hover for coc-zi"
+        },
         "zi.trace.server": {
           "type": "string",
           "default": "off",
