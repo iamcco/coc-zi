@@ -95,7 +95,7 @@ export class WordCompleteProvider extends Dispose {
   }
 
   async getWords(word: string) {
-    const words = await this.words.getWords(word)
+    const words = (await this.words.getWords(word)).filter(w => w);
     if (/^[A-Z]/.test(word)) {
       return words.map(w => {
         const label = `${w[0].toUpperCase()}${w.slice(1)}`;
