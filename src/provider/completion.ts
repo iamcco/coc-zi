@@ -1,22 +1,14 @@
-import { languages, Uri, workspace } from 'coc.nvim';
-import { createSourceFile, ScriptTarget } from 'typescript';
-import { CompletionItem, TextDocument, Position, Range } from 'vscode-languageserver-protocol';
+import { CompletionItem, languages, TextDocument, Uri, workspace } from 'coc.nvim';
+import { createSourceFile, ScriptTarget, SyntaxKind } from 'typescript';
+import { Position, Range } from 'vscode-languageserver-protocol';
 
 import { Dispose } from '../common/dispose';
+import { logger } from '../common/logger';
 import { findNode } from '../common/util';
 import { Edict } from './edict';
-import { logger } from '../common/logger';
 import { Words } from './words';
 
 const log = logger.getLog('complete-provider');
-
-const syntaxKindsValues: Record<string, number> = {
-  StringLiteral: 10,
-  NoSubstitutionTemplateLiteral: 14,
-  TemplateHead: 15,
-  TemplateTail: 16,
-  TemplateMiddle: 17,
-};
 
 export class WordCompleteProvider extends Dispose {
   private patterns: Record<string, string[]>;
@@ -58,7 +50,7 @@ export class WordCompleteProvider extends Dispose {
             const word = document.getText(wordRange);
             log(`current word: ${word}`);
             const linePre = document.getText(Range.create(Position.create(position.line, 0), position));
-            if (!patterns.length || patterns.some(p => new RegExp(p).test(linePre))) {
+            if (!patterns.length || patterns.some((p) => new RegExp(p).test(linePre))) {
               return this.getWords(word);
             } else if (syntaxKinds && syntaxKinds.length) {
               const text = document.getText();
@@ -70,7 +62,7 @@ export class WordCompleteProvider extends Dispose {
                 return [];
               }
 
-              if (syntaxKinds.some(sk => node.kind === syntaxKindsValues[sk])) {
+              if (syntaxKinds.some((sk) => node.kind === SyntaxKind[sk as keyof typeof SyntaxKind])) {
                 return this.getWords(word);
               }
             }
@@ -95,9 +87,9 @@ export class WordCompleteProvider extends Dispose {
   }
 
   async getWords(word: string) {
-    const words = (await this.words.getWords(word)).filter(w => w);
+    const words = (await this.words.getWords(word)).filter((w) => w);
     if (/^[A-Z]/.test(word)) {
-      return words.map(w => {
+      return words.map((w) => {
         const label = `${w[0].toUpperCase()}${w.slice(1)}`;
         return {
           label,
@@ -105,7 +97,7 @@ export class WordCompleteProvider extends Dispose {
         };
       });
     }
-    return words.map(w => ({
+    return words.map((w) => ({
       label: w,
       insertText: w,
     }));

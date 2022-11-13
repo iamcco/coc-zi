@@ -1,4 +1,4 @@
-import { OutputChannel, workspace } from 'coc.nvim';
+import { OutputChannel, window } from 'coc.nvim';
 
 import { Dispose } from './dispose';
 
@@ -13,7 +13,7 @@ class Logger extends Dispose {
     if (!enabled) {
       return this;
     }
-    this.outputChannel = workspace.createOutputChannel('zi');
+    this.outputChannel = window.createOutputChannel('zi');
     return this;
   }
 

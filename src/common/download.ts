@@ -1,8 +1,8 @@
+import { window, workspace } from 'coc.nvim';
 import fs from 'fs';
-import tunnel from 'tunnel';
 import got from 'got';
-import { workspace } from 'coc.nvim';
 import { Agent } from 'http';
+import tunnel from 'tunnel';
 
 function getAgent(): Agent | undefined {
   const proxy = workspace.getConfiguration('http').get<string>('proxy', '');
@@ -24,7 +24,7 @@ function getAgent(): Agent | undefined {
 }
 
 export async function download(path: string, url: string, name: string): Promise<void> {
-  const statusItem = workspace.createStatusBarItem(0, { progress: true });
+  const statusItem = window.createStatusBarItem(0, { progress: true });
   statusItem.text = `Downloading ${name} data...`;
   statusItem.show();
 
@@ -47,7 +47,7 @@ export async function download(path: string, url: string, name: string): Promise
           statusItem.hide();
           resolve();
         })
-        .on('error', e => {
+        .on('error', (e) => {
           reject(e);
         });
     } catch (e) {

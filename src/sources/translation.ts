@@ -19,7 +19,7 @@ class Task extends EventEmitter implements ListTask {
   private isCancel = false;
 
   async start(text: string) {
-    this.translators.forEach(async translator => {
+    this.translators.forEach(async (translator) => {
       const res = await translator.translate(text, targetLang);
       this.resCount += 1;
       this.updateItems(translator.name, text, res);

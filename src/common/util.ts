@@ -1,9 +1,9 @@
-import { ExecOptions, exec } from 'child_process';
-import crypto from 'crypto';
-import { Node, SourceFile, forEachChild } from 'typescript';
-import { MarkupContent, MarkupKind } from 'vscode-languageserver-protocol';
-import { configure, xhr, XHROptions } from 'request-light';
+import { exec, ExecOptions } from 'child_process';
 import { workspace } from 'coc.nvim';
+import crypto from 'crypto';
+import { configure, xhr, XHROptions } from 'request-light';
+import { forEachChild, Node, SourceFile } from 'typescript';
+import { MarkupContent, MarkupKind } from 'vscode-languageserver-protocol';
 
 export function findNode(sourceFile: SourceFile, offset: number): Node | undefined {
   function find(node: Node): Node | undefined {
@@ -59,7 +59,7 @@ export function getWordByIndex(word: string, idx: number) {
 
 function urlencode(data: Record<string, string>): string {
   return Object.keys(data)
-    .map(key => [key, data[key]].map(encodeURIComponent).join('='))
+    .map((key) => [key, data[key]].map(encodeURIComponent).join('='))
     .join('&');
 }
 
@@ -113,10 +113,7 @@ export async function request(
 }
 
 export function md5(str: string): string {
-  return crypto
-    .createHash('md5')
-    .update(str)
-    .digest('hex');
+  return crypto.createHash('md5').update(str).digest('hex');
 }
 
 export const execCommand = (
@@ -128,7 +125,7 @@ export const execCommand = (
   stdout: string;
   stderr: string;
 }> => {
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     let code = 0;
     exec(
       command,
