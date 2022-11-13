@@ -818,7 +818,7 @@
     "eslint": "^8.27.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
-    "got": "^9.6.0",
+    "got": "^11.8.5",
     "prettier": "^2.7.1",
     "request-light": "^0.2.4",
     "ts-loader": "^9.4.1",
