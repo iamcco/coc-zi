@@ -27,7 +27,7 @@ export class WordCompleteProvider extends Dispose {
     this.push(
       languages.registerCompletionItemProvider(
         'coc-zi',
-        this.words.isUseLook ? 'look' : '10k',
+        'zi',
         null,
         {
           provideCompletionItems: async (document: TextDocument, position: Position): Promise<CompletionItem[]> => {
@@ -47,8 +47,13 @@ export class WordCompleteProvider extends Dispose {
             if (!wordRange) {
               return [];
             }
-            const word = document.getText(wordRange);
+            const word = document.getText(wordRange).trim();
             log(`current word: ${word}`);
+
+            if (!word) {
+              return [];
+            }
+
             const linePre = document.getText(Range.create(Position.create(position.line, 0), position));
             if (!patterns.length || patterns.some((p) => new RegExp(p).test(linePre))) {
               return this.getWords(word);

@@ -21,15 +21,15 @@ export async function activate(context: ExtensionContext) {
   // register edict
   const edict = new Edict(context);
   const words = new Words(context);
+
   context.subscriptions.push(edict);
-  await words.init();
 
   // register completion provider
   context.subscriptions.push(new WordCompleteProvider(edict, words));
 
   // register hover provider
   if (needHover) {
-      context.subscriptions.push(new WordHoverProvider(edict));
+    context.subscriptions.push(new WordHoverProvider(edict));
   }
 
   // register translations source

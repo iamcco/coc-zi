@@ -8,54 +8,66 @@ import { execCommand } from '../common/util';
 
 const log = logger.getLog('Words');
 
+const get10kWords = async (words10kPath: string): Promise<string[]> => {
+  return new Promise((resolve) => {
+    if (existsSync(words10kPath)) {
+      const words10k: string[] = [];
+      readline
+        .createInterface({
+          input: createReadStream(words10kPath),
+          terminal: false,
+        })
+        .on('close', () => {
+          resolve(words10k);
+        })
+        .on('line', (line: string) => {
+          words10k.push(line.trim());
+        });
+    } else {
+      resolve([]);
+    }
+  });
+};
+
 export class Words {
-  private wordsPath: string;
-  private _words: string[] = [];
-  private _isUseLook = false;
+  private words10kPath: string;
+  private words: string[] = [];
 
   constructor(context: ExtensionContext) {
-    this.wordsPath = context.asAbsolutePath('./words/10k.txt');
+    this.words10kPath = context.asAbsolutePath('./words/10k.txt');
   }
 
-  get isUseLook() {
-    return this._isUseLook;
-  }
+  public async getWords(word: string): Promise<string[]> {
+    if (!this.words.length) {
+      let words: string[] = [];
 
-  public async getWords(str: string): Promise<string[]> {
-    if (this.isUseLook) {
-      const { stdout } = await execCommand(`look -f ${str}`);
-      const words = (stdout || '').trim().split('\n');
-      if (words.length) {
-        return words;
-      }
-    }
-    return this._words;
-  }
-
-  async init() {
-    try {
-      const look = await which('look');
-      if (!look) {
-        throw new Error();
-      }
-      this._isUseLook = true;
-    } catch (error) {
-      log('look command does not found, use 10k instead');
-    }
-
-    const { wordsPath } = this;
-
-    if (!existsSync(wordsPath)) {
-      return;
-    }
-
-    readline
-      .createInterface({
-        input: createReadStream(wordsPath),
-        terminal: false,
-      })
-      .on('line', (line: string) => {
-        this._words.push(line.trim());
+      const lookExist = await which('look').catch(() => {
+        log('look command does not found, use 10k only');
+        return false;
       });
+
+      if (lookExist) {
+        const { stdout } = await execCommand("look -f ''");
+        const res = (stdout || '').trim().split('\n');
+        words = res;
+      }
+
+      const words10k = await get10kWords(this.words10kPath);
+
+      const m = words.reduce<Record<string, true>>((acc, cur) => {
+        acc[cur] = true;
+        return acc;
+      }, {});
+
+      for (const word of words10k) {
+        if (!m[word]) {
+          words.push(word);
+        }
+      }
+
+      this.words = words;
+    }
+
+    return this.words.filter((w) => w.startsWith(word[0]));
   }
 }
